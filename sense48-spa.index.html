@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>SENSE 48 — Wellness & Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C4A265;
+  --gold-light: #D4BA82;
+  --gold-dark: #A88942;
+  --cream: #FAF6F0;
+  --cream-dark: #F0EAE0;
+  --charcoal: #2C2824;
+  --warm-gray: #8A8078;
+  --soft-brown: #6B5E52;
+  --blush: #F5EDE4;
+  --white: #FEFDFB;
+  --shadow-sm: 0 2px 12px rgba(44,40,36,0.06);
+  --shadow-md: 0 8px 32px rgba(44,40,36,0.08);
+  --shadow-lg: 0 16px 48px rgba(44,40,36,0.12);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--cream);
+  color: var(--charcoal);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px 60px;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(212,186,130,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(196,162,101,0.15) 0%, transparent 50%),
+    linear-gradient(175deg, #FAF6F0 0%, #F5EDE4 40%, #EDE4D6 100%);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C4A265' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.8;
+  animation: float 30s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(10px, -10px) rotate(1deg); }
+  66% { transform: translate(-5px, 5px) rotate(-0.5deg); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-block;
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.2s forwards;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(42px, 10vw, 72px);
+  letter-spacing: 6px;
+  color: var(--charcoal);
+  line-height: 1;
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.4s forwards;
+}
+
+.hero-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(18px, 4vw, 26px);
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.6s forwards;
+}
+
+.hero-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  margin: 0 auto 32px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.8s forwards;
+}
+
+.hero-tagline {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: var(--warm-gray);
+  max-width: 320px;
+  line-height: 1.8;
+  opacity: 0;
+  animation: fadeUp 1s ease 1s forwards;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 1s ease 1.3s forwards;
+}
+
+.scroll-hint span {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+}
+
+.scroll-dot {
+  width: 1px;
+  height: 24px;
+  background: var(--gold);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.3); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTION ── */
+.services-section {
+  padding: 60px 16px 100px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: var(--charcoal);
+  margin-bottom: 16px;
+}
+
+.section-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto;
+}
+
+/* ── SERVICE CARDS ── */
+.service-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 32px 24px 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.service-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.service-card:active {
+  transform: scale(0.985);
+}
+
+.service-card:hover::before,
+.service-card.expanded::before {
+  opacity: 1;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.service-name-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--charcoal);
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+.service-name-ru {
+  font-size: 13px;
+  color: var(--warm-gray);
+  font-weight: 300;
+  margin-bottom: 14px;
+  letter-spacing: 0.3px;
+}
+
+.service-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.meta-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--soft-brown);
+  background: var(--blush);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 400;
+}
+
+.meta-tag svg {
+  width: 13px;
+  height: 13px;
+  stroke: var(--gold);
+}
+
+.service-desc {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--warm-gray);
+  font-weight: 300;
+  margin-bottom: 20px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, margin 0.5s ease, opacity 0.4s ease;
+  opacity: 0;
+}
+
+.service-card.expanded .service-desc {
+  max-height: 200px;
+  opacity: 1;
+  margin-bottom: 20px;
+}
+
+.card-toggle {
+  background: none;
+  border: none;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  margin-bottom: 20px;
+  transition: color 0.3s;
+}
+
+.card-toggle:hover { color: var(--gold-dark); }
+
+.toggle-icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--gold-light);
+  border-radius: 50%;
+  position: relative;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.toggle-icon::before,
+.toggle-icon::after {
+  content: '';
+  position: absolute;
+  background: var(--gold);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease;
+}
+
+.toggle-icon::before {
+  width: 8px;
+  height: 1px;
+}
+
+.toggle-icon::after {
+  width: 1px;
+  height: 8px;
+}
+
+.service-card.expanded .toggle-icon {
+  background: var(--gold-light);
+  transform: rotate(45deg);
+}
+
+.service-card.expanded .toggle-icon::before,
+.service-card.expanded .toggle-icon::after {
+  background: var(--white);
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 16px;
+  border-top: 1px solid rgba(196,162,101,0.15);
+  margin-bottom: 20px;
+}
+
+.price-amount {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--charcoal);
+  line-height: 1.3;
+}
+
+.price-amount small {
+  display: block;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  color: var(--warm-gray);
+  letter-spacing: 0.5px;
+}
+
+.price-currency {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--warm-gray);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.btn-book {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background: var(--charcoal);
+  color: var(--cream);
+  border: none;
+  border-radius: 12px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-book::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(196,162,101,0.15), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn-book:hover {
+  background: var(--gold-dark);
+  color: var(--white);
+}
+
+.btn-book:hover::before {
+  left: 100%;
+}
+
+.btn-book:active {
+  transform: scale(0.97);
+}
+
+/* ── FOOTER CTA ── */
+.footer-cta {
+  text-align: center;
+  padding: 60px 24px 48px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(212,186,130,0.12) 0%, transparent 60%),
+    var(--cream);
+}
+
+.footer-line {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto 28px;
+}
+
+.footer-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--soft-brown);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.btn-main-book {
+  display: inline-block;
+  padding: 16px 48px;
+  background: var(--gold);
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(196,162,101,0.3);
+}
+
+.btn-main-book:hover {
+  background: var(--gold-dark);
+  box-shadow: 0 6px 28px rgba(196,162,101,0.4);
+  transform: translateY(-2px);
+}
+
+.btn-main-book:active {
+  transform: scale(0.97);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 24px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--warm-gray);
+}
+
+.footer-bottom a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+/* ── TOAST ── */
+.toast {
+  position: fixed;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--charcoal);
+  color: var(--cream);
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  z-index: 100;
+  box-shadow: var(--shadow-lg);
+  transition: bottom 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  white-space: nowrap;
+}
+
+.toast.show {
+  bottom: 32px;
+}
+
+/* ── RESPONSIVE ── */
+@media (min-width: 600px) {
+  .services-section {
+    max-width: 520px;
+  }
+  .service-card {
+    padding: 36px 32px 32px;
+  }
+}
+
+@media (min-width: 900px) {
+  .services-section {
+    max-width: 640px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Piramit Tower · 48th Floor</div>
+    <h1 class="hero-title">SENSE 48</h1>
+    <p class="hero-subtitle">Wellness & Spa</p>
+    <div class="hero-line"></div>
+    <p class="hero-tagline">Ритуалы, возвращающие телу лёгкость, а сознанию — ясность</p>
+  </div>
+  <div class="scroll-hint">
+    <span>услуги</span>
+    <div class="scroll-dot"></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="section-header">
+    <p class="section-label">Меню процедур</p>
+    <h2 class="section-title">Ритуалы & Цены</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <!-- CARD 1 — Still Massage -->
+  <div class="service-card" data-service="still-massage">
+    <div class="card-header">
+      <div>
+        <div class="service-name-en">Still Massage</div>
+        <div class="service-name-ru">Классический расслабляющий массаж</div>
+      </div>
+    </div>
+    <div class="service-meta">
+      <span class="meta-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        50 / 70 мин
+      </span>
+    </div>
+    <button class="card-toggle" onclick="toggleCard(this)">
+      <span class="toggle-icon"></span> Подробнее
+    </button>
+    <div class="service-desc">
+      Мягкая техника, направленная на глубокое расслабление тела, снижение напряжения и восстановление внутреннего ритма. Спокойное воздействие, позволяющее телу перейти в состояние покоя и лёгкости.
+    </div>
+    <div class="price-row">
+      <div class="price-amount">
+        1 000 000 / 1 200 000
+        <small>50 мин / 70 мин</small>
+      </div>
+      <div class="price-currency">UZS</div>
+    </div>
+    <a href="#" class="btn-book" onclick="bookService(event, 'Still Massage')">Записаться</a>
+  </div>
+
+  <!-- CARD 2 — Head Release -->
+  <div class="service-card" data-service="head-release">
+    <div class="card-header">
+      <div>
+        <div class="service-name-en">Head Release</div>
+        <div class="service-name-ru">Массаж головы</div>
+      </div>
+    </div>
+    <div class="service-meta">
+      <span class="meta-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        20 мин
+      </span>
+    </div>
+    <button class="card-toggle" onclick="toggleCard(this)">
+      <span class="toggle-icon"></span> Подробнее
+    </button>
+    <div class="service-desc">
+      Мягкое и точечное воздействие, направленное на снятие ментального напряжения, расслабление и восстановление ясности состояния. Идеально дополняет основной ритуал восстановления.
+    </div>
+    <div class="price-row">
+      <div class="price-amount">650 000</div>
+      <div class="price-currency">UZS</div>
+    </div>
+    <a href="#" class="btn-book" onclick="bookService(event, 'Head Release')">Записаться</a>
+  </div>
+
+  <!-- CARD 3 — Cleanse Flow -->
+  <div class="service-card" data-service="cleanse-flow">
+    <div class="card-header">
+      <div>
+        <div class="service-name-en">Cleanse Flow</div>
+        <div class="service-name-ru">Очищение + глубокий массаж</div>
+      </div>
+    </div>
+    <div class="service-meta">
+      <span class="meta-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        60 / 90 мин
+      </span>
+    </div>
+    <button class="card-toggle" onclick="toggleCard(this)">
+      <span class="toggle-icon"></span> Подробнее
+    </button>
+    <div class="service-desc">
+      Ритуал начинается с деликатного очищения кожи с помощью пилинга или скраба, подготавливая тело к дальнейшему воздействию. Завершается глубоким массажем, направленным на снятие мышечного напряжения, улучшение циркуляции и ощущение полной перезагрузки.
+    </div>
+    <div class="price-row">
+      <div class="price-amount">
+        1 900 000 / 2 100 000
+        <small>60 мин / 90 мин</small>
+      </div>
+      <div class="price-currency">UZS</div>
+    </div>
+    <a href="#" class="btn-book" onclick="bookService(event, 'Cleanse Flow')">Записаться</a>
+  </div>
+
+  <!-- CARD 4 — Body Envelop -->
+  <div class="service-card" data-service="body-envelop">
+    <div class="card-header">
+      <div>
+        <div class="service-name-en">Body Envelop</div>
+        <div class="service-name-ru">Обёртывание Sothys</div>
+      </div>
+    </div>
+    <div class="service-meta">
+      <span class="meta-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        70 мин
+      </span>
+    </div>
+    <button class="card-toggle" onclick="toggleCard(this)">
+      <span class="toggle-icon"></span> Подробнее
+    </button>
+    <div class="service-desc">
+      Ритуал глубокого ухода за телом с использованием питательных и восстанавливающих составов от Sothys. Направлен на восстановление тонуса кожи, улучшение её текстуры и мягкое моделирование силуэта.
+    </div>
+    <div class="price-row">
+      <div class="price-amount">2 200 000</div>
+      <div class="price-currency">UZS</div>
+    </div>
+    <a href="#" class="btn-book" onclick="bookService(event, 'Body Envelop')">Записаться</a>
+  </div>
+
+  <!-- CARD 5 — Whole Alignment -->
+  <div class="service-card" data-service="whole-alignment">
+    <div class="card-header">
+      <div>
+        <div class="service-name-en">Whole Alignment</div>
+        <div class="service-name-ru">Комплексный ритуал: тело + лицо</div>
+      </div>
+    </div>
+    <div class="service-meta">
+      <span class="meta-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        90 мин
+      </span>
+    </div>
+    <button class="card-toggle" onclick="toggleCard(this)">
+      <span class="toggle-icon"></span> Подробнее
+    </button>
+    <div class="service-desc">
+      Целостная процедура, объединяющая массаж тела и лица для восстановления баланса, тонуса и общего состояния. Глубокое расслабление сочетается с мягкой работой с лицом, возвращая ощущение гармонии и внутреннего равновесия.
+    </div>
+    <div class="price-row">
+      <div class="price-amount">
+        1 900 000 / 2 100 000
+        <small>варианты программы</small>
+      </div>
+      <div class="price-currency">UZS</div>
+    </div>
+    <a href="#" class="btn-book" onclick="bookService(event, 'Whole Alignment')">Записаться</a>
+  </div>
+
+  <!-- CARD 6 — Salt & Skin Polish -->
+  <div class="service-card" data-service="salt-skin-polish">
+    <div class="card-header">
+      <div>
+        <div class="service-name-en">Salt & Skin Polish</div>
+        <div class="service-name-ru">Обновление кожи солевым скрабом</div>
+      </div>
+    </div>
+    <div class="service-meta">
+      <span class="meta-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        50 мин
+      </span>
+    </div>
+    <button class="card-toggle" onclick="toggleCard(this)">
+      <span class="toggle-icon"></span> Подробнее
+    </button>
+    <div class="service-desc">
+      Деликатное обновление кожи с использованием скраба на основе трёх видов соли. Выравнивает текстуру, очищает и оставляет ощущение чистоты, гладкости и свежести кожи.
+    </div>
+    <div class="price-row">
+      <div class="price-amount">1 500 000</div>
+      <div class="price-currency">UZS</div>
+    </div>
+    <a href="#" class="btn-book" onclick="bookService(event, 'Salt & Skin Polish')">Записаться</a>
+  </div>
+
+  <!-- CARD 7 — Leg Relief -->
+  <div class="service-card" data-service="leg-relief">
+    <div class="card-header">
+      <div>
+        <div class="service-name-en">Leg Relief</div>
+        <div class="service-name-ru">4-этапный ритуал для ног</div>
+      </div>
+    </div>
+    <div class="service-meta">
+      <span class="meta-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        40 мин
+      </span>
+    </div>
+    <button class="card-toggle" onclick="toggleCard(this)">
+      <span class="toggle-icon"></span> Подробнее
+    </button>
+    <div class="service-desc">
+      Глубокая многоэтапная процедура с применением интенсивных массажных техник. Способствует снятию тяжести, улучшению лимфодренажа, восстановлению тонуса и ощущению лёгкости в ногах.
+    </div>
+    <div class="price-row">
+      <div class="price-amount">1 000 000</div>
+      <div class="price-currency">UZS</div>
+    </div>
+    <a href="#" class="btn-book" onclick="bookService(event, 'Leg Relief')">Записаться</a>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="footer-cta">
+  <div class="footer-line"></div>
+  <p class="footer-text">Позвольте себе паузу.<br>Запишитесь на ритуал.</p>
+  <a href="#" class="btn-main-book" onclick="bookService(event, 'общая запись')">Записаться</a>
+</section>
+
+<div class="footer-bottom">
+  SENSE 48 &middot; Piramit Tower &middot; Tashkent
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// Toggle card expand/collapse
+function toggleCard(btn) {
+  const card = btn.closest('.service-card');
+  card.classList.toggle('expanded');
+  btn.querySelector('.toggle-icon');
+  const text = card.classList.contains('expanded') ? 'Скрыть' : 'Подробнее';
+  btn.childNodes[btn.childNodes.length - 1].textContent = ' ' + text;
+}
+
+// Book service — open Telegram
+function bookService(e) {
+  e.preventDefault();
+  window.open('https://t.me/Sense48', '_blank');
+}
+
+// Toast notification
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.service-card').forEach(card => {
+  observer.observe(card);
+});
+</script>
+</body>
+</html>
